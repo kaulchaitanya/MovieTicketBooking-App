@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="5dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DAA520">
+
+        <ImageView
+            android:id="@+id/bookShow_imageView"
+            android:layout_width="145dp"
+            android:layout_height="230dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:background="#d0d3d4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Constraint">
+
+            <TextView
+                android:id="@+id/MovieName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movie name"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/MovieName"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Constraint"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Seat:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price:"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            app:layout_constraintLeft_toRightOf="@+id/text8"
+            />
+
+        <TextView
+            android:id="@+id/t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹"
+            android:textColor="#DC143C"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toRightOf="@id/text9"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/text8"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Language"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cast:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Director"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Cast"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Category"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theatre:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/Address"
+            app:layout_constraintLeft_toRightOf="@+id/bookShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="3dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/Constraint"
+            app:layout_constraintLeft_toRightOf="@id/text1"
+            />
+
+        <TextView
+            android:id="@+id/Seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seat:"
+            android:textSize="15dp"
+            android:textColor="#DC143C"
+            android:singleLine="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Time"
+            app:layout_constraintLeft_toRightOf="@id/text8"
+            />
+
+        <TextView
+            android:id="@+id/book_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="1dp"
+            app:layout_constraintLeft_toRightOf="@id/t"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            />
+
+        <TextView
+            android:id="@+id/Language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Seat"
+            app:layout_constraintLeft_toRightOf="@+id/text2"
+            />
+
+        <TextView
+            android:id="@+id/Director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Language"
+            app:layout_constraintLeft_toRightOf="@id/text3"
+            />
+
+        <TextView
+            android:id="@+id/Cast"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Cast"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:maxLines="2"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Director"
+            app:layout_constraintLeft_toRightOf="@id/text4"
+            />
+
+        <TextView
+            android:id="@+id/Category"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:maxLines="2"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Cast"
+            app:layout_constraintLeft_toRightOf="@id/text5"
+            />
+
+        <TextView
+            android:id="@+id/Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Category"
+            app:layout_constraintLeft_toRightOf="@id/text6"
+            />
+
+        <TextView
+            android:id="@+id/TheatreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theatre Name"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/Address"
+            app:layout_constraintLeft_toRightOf="@id/text7"
+            />
+
+        <Button
+            android:id="@+id/BookShow"
+            android:layout_width="145dp"
+            android:layout_height="35dp"
+            android:text="Book Show"
+            android:textColor="#000000"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:background="@drawable/button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookShow_imageView"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/BookShow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>

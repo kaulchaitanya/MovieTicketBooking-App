@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:background="#DAA520"
+        android:id="@+id/constraint6">
+
+        <ImageView
+            android:id="@+id/addShow_imageView"
+            android:layout_width="145dp"
+            android:layout_height="230dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:background="#d0d3d4"
+            android:id="@+id/constraint">
+
+            <TextView
+                android:id="@+id/moviename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movie name"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/moviename"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Time:"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/constraint"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Seat:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price:"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            app:layout_constraintLeft_toRightOf="@+id/text8"
+            />
+
+        <TextView
+            android:id="@+id/t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹"
+            android:textColor="#DC143C"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toRightOf="@id/text9"
+            app:layout_constraintTop_toBottomOf="@+id/text1"
+            />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language:"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/text8"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director:"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/language"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cast:"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/director"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category:"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/cast"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/category"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/text7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theatre:"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/address"
+            app:layout_constraintLeft_toRightOf="@+id/addShow_imageView"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="4dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/constraint"
+            app:layout_constraintLeft_toRightOf="@id/text1"
+            />
+
+        <TextView
+            android:id="@+id/seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seat:"
+            android:textSize="15dp"
+            android:textColor="#DC143C"
+            android:singleLine="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/time"
+            app:layout_constraintLeft_toRightOf="@id/text8"
+            />
+
+        <TextView
+            android:id="@+id/movie_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="1dp"
+            app:layout_constraintLeft_toRightOf="@id/t"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            />
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/seat"
+            app:layout_constraintLeft_toRightOf="@+id/text2"
+            />
+
+        <TextView
+            android:id="@+id/director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Director"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/language"
+            app:layout_constraintLeft_toRightOf="@id/text3"
+            />
+
+        <TextView
+            android:id="@+id/cast"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Cast"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:maxLines="2"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/director"
+            app:layout_constraintLeft_toRightOf="@id/text4"
+            />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:maxLines="2"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/cast"
+            app:layout_constraintLeft_toRightOf="@id/text5"
+            />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/category"
+            app:layout_constraintLeft_toRightOf="@id/text6"
+            />
+
+        <TextView
+            android:id="@+id/theatrename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theatre Name"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/address"
+            app:layout_constraintLeft_toRightOf="@id/text7"
+            />
+
+        <Button
+            android:id="@+id/Update"
+            android:layout_width="72.5dp"
+            android:layout_height="35dp"
+            android:text="Update"
+            android:textColor="#000000"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:background="@drawable/button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addShow_imageView"
+            />
+
+        <Button
+            android:id="@+id/Delete"
+            android:layout_width="72.5dp"
+            android:layout_height="35dp"
+            android:text="Delete"
+            android:textColor="#000000"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/button"
+            app:layout_constraintLeft_toRightOf="@id/Update"
+            app:layout_constraintTop_toBottomOf="@+id/addShow_imageView"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraint6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

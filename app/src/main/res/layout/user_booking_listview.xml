@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/constraint5"
+        android:background="#DAA520"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/Image_view"
+            android:layout_width="145dp"
+            android:layout_height="195dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+            android:textSize="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/book_Theatre"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName:"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/text5"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/book_User_Name"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/text7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theatre:"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/book_Address"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seat Number:"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/constraint1"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/text4"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            />
+
+        <TextView
+            android:id="@+id/Book_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textSize="15dp"
+            android:textColor="#DC143C"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/Book_seat"
+            app:layout_constraintLeft_toRightOf="@+id/text5"
+            />
+
+        <TextView
+            android:id="@+id/book_Booking_Id"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Movie ID"
+            android:textSize="16dp"
+            android:textColor="#DC143C"
+            android:maxLines="2"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/book_Theatre"
+            app:layout_constraintLeft_toRightOf="@+id/text1"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            app:layout_constraintLeft_toRightOf="@+id/Image_view"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:background="#d0d3d4"
+            android:id="@+id/constraint1">
+
+            <TextView
+                android:id="@+id/book_Movie_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movie name"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_Movie_Name"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/book_User_Name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:maxLines="2"
+            app:layout_constraintTop_toBottomOf="@+id/Book_Time"
+            app:layout_constraintLeft_toRightOf="@+id/text3"
+            />
+
+        <TextView
+            android:id="@+id/book_Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/book_User_Name"
+            app:layout_constraintLeft_toRightOf="@+id/text6"
+            />
+
+        <TextView
+            android:id="@+id/book_Theatre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="theatre"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:singleLine="true"
+            app:layout_constraintTop_toBottomOf="@+id/book_Address"
+            app:layout_constraintLeft_toRightOf="@+id/text7"
+            />
+
+        <TextView
+            android:id="@+id/Book_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seat"
+            android:layout_marginTop="10dp"
+            android:textColor="#DC143C"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/constraint1"
+            app:layout_constraintLeft_toRightOf="@+id/text4"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraint5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
