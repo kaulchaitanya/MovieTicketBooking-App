@@ -188,6 +188,12 @@ public class SignUp extends AppCompatActivity {
         return result;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(SignUp.this,Login.class));
+    }
+
     private void SendUserData(){
              DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
              Userprofile userProfile = new Userprofile(Name,Dob,Email,Mobile,Address,type);
