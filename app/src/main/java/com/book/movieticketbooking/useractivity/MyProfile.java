@@ -56,6 +56,7 @@ public class MyProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MyProfile.this, UpdateProfileImage.class));
+                finish();
             }
         });
 

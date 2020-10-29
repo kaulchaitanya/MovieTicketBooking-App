@@ -43,29 +43,48 @@ public class UpdateProfileImage extends AppCompatActivity {
     private ImageView image;
     private FirebaseAuth firebaseAuth;
     private Button button;
-    private static final int PICK = 3;
-    Uri imagePath;
+    Uri uri;
+    Uri FinalCrop;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode,final  @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK && resultCode == RESULT_OK && data.getData() != null){
-            imagePath = data.getData();
-            if (imagePath == null){
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK && data.getData() != null){
+
+            Uri ImageUri = CropImage.getPickImageResultUri(this,data);
+
+            if (ImageUri == null){
                 button.setVisibility(View.INVISIBLE);
             }else {
                 button.setVisibility(View.VISIBLE);
             }
 
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
-                image.setImageBitmap(bitmap);
-            }catch (Exception e){
-                e.printStackTrace();
+            if (CropImage.isReadExternalStoragePermissionsRequired(this,ImageUri)){
+                uri = ImageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+            }else {
+                startCrop(ImageUri);
             }
-
         }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK){
+                FinalCrop = result.getUri();
+                image.setImageURI(FinalCrop);
+                Toast.makeText(this, "Image Cropped", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void startCrop(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setAspectRatio(1,1)
+                .start(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -98,11 +117,12 @@ public class UpdateProfileImage extends AppCompatActivity {
                     progressDialog.setTitle("Uploading Profile Image");
                     progressDialog.show();
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image").child(firebaseAuth.getUid()).child("Image");
-                    UploadTask uploadTask = storageReference.putFile(imagePath);
+                    UploadTask uploadTask = storageReference.putFile(FinalCrop);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(),MyProfile.class));
                             Toast.makeText(getApplicationContext(), "Image update successful", Toast.LENGTH_SHORT).show();
                             finish();
                         }
@@ -127,10 +147,7 @@ public class UpdateProfileImage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_images:
-                Intent intent = new Intent((Intent.ACTION_PICK));
-                //intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent,PICK);
+                CropImage.startPickImageActivity(UpdateProfileImage.this);
                 break;
             case R.id.action_delete:
                 Delete();
@@ -139,7 +156,7 @@ public class UpdateProfileImage extends AppCompatActivity {
                 try {
                     Intent intent1 = new Intent(Intent.ACTION_SEND);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent1.putExtra(Intent.EXTRA_STREAM,imagePath);
+                    intent1.putExtra(Intent.EXTRA_STREAM,FinalCrop);
                     intent1.setType("image/*");
                     startActivity(Intent.createChooser(intent1,"Share Via"));
                 }catch (Exception e){
@@ -181,5 +198,12 @@ public class UpdateProfileImage extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(UpdateProfileImage.this,MyProfile.class));
+        finish();
     }
 }
