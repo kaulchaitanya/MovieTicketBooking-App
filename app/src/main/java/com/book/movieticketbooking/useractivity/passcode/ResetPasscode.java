@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hanks.passcodeview.PasscodeView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.book.movieticketbooking.R.color.colorPrimary;
 
 public class ResetPasscode extends AppCompatActivity {
@@ -53,7 +56,9 @@ public class ResetPasscode extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(String number) {
-                        databaseReference.child("passnumber").setValue(number).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Map<String,Object > updatePAssCode = new HashMap<String, Object>();
+                        updatePAssCode.put("passNumber",number);
+                        databaseReference.updateChildren(updatePAssCode).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

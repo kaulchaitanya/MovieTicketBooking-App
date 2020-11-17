@@ -43,16 +43,25 @@ public class PassCode extends AppCompatActivity {
         final PasscodeView passcodeView = findViewById(R.id.passcode_View);
         passcode = (TextView)findViewById(R.id.forgot_passcode);
 
+        passcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PassCode.this,ResetPasscode.class));
+                finish();
+            }
+        });
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Passcode").child(firebaseAuth.getUid());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final String code = String.valueOf(snapshot.child("passnumber").getValue());
+                final String code = String.valueOf(snapshot.child("passNumber").getValue());
                 passcodeView.setPasscodeLength(4).setCorrectInputTip("You can now access your Wallet")
                         .setLocalPasscode(code).
                         setListener(new PasscodeView.PasscodeViewListener() {
                             @Override
                             public void onFail() {
+
                             }
 
                             @Override
@@ -60,14 +69,6 @@ public class PassCode extends AppCompatActivity {
                                 startActivity(new Intent(PassCode.this, BankAccount.class));
                                 finish();
                             }
-                });
-
-                passcode.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(PassCode.this,ResetPasscode.class));
-                        finish();
-                    }
                 });
             }
 

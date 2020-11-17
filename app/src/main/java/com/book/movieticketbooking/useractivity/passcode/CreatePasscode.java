@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.book.movieticketbooking.R;
 import com.book.movieticketbooking.useractivity.BankAccount;
-import com.book.movieticketbooking.useractivity.model.Passcode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +20,9 @@ import static com.book.movieticketbooking.R.color.colorPrimary;
 
 public class CreatePasscode extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
+    private PasscodeView passcodeView;
+    private String CurrentId;
+    private DatabaseReference databaseReference;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -32,9 +34,11 @@ public class CreatePasscode extends AppCompatActivity {
         getWindow().setStatusBarColor((ContextCompat.getColor(getApplicationContext(), colorPrimary)));
 
         firebaseAuth = FirebaseAuth.getInstance();
-        final PasscodeView passcodeView = (PasscodeView) findViewById(R.id.passcodeView);
+        CurrentId = firebaseAuth.getCurrentUser().getUid();
 
-        passcodeView.setCorrectInputTip("Your passcode is set").setListener(new PasscodeView.PasscodeViewListener() {
+        passcodeView = (PasscodeView) findViewById(R.id.passcodeView);
+
+        passcodeView.setCorrectInputTip("Your Passcode is Set").setListener(new PasscodeView.PasscodeViewListener() {
             @Override
             public void onFail() {
                 Toast.makeText(getApplication(),"Passcode do not match",Toast.LENGTH_SHORT).show();
@@ -42,13 +46,13 @@ public class CreatePasscode extends AppCompatActivity {
 
             @Override
             public void onSuccess(String number) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Passcode").child(firebaseAuth.getUid());
-                Passcode passcode = new Passcode(number);
-                databaseReference.setValue(passcode);
-                startActivity(new Intent(CreatePasscode.this, BankAccount.class));
+                databaseReference = FirebaseDatabase.getInstance().getReference("Passcode").child(CurrentId);
+                //PasscodeSetting passcodeSetting = new PasscodeSetting(number);
+                databaseReference.child("passNumber").setValue(number);
+                databaseReference.child("UserId").setValue(CurrentId);
+                startActivity(new Intent(getApplicationContext(),BankAccount.class));
                 finish();
             }
         });
-
     }
 }

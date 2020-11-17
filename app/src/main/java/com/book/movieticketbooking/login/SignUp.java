@@ -136,7 +136,7 @@ public class SignUp extends AppCompatActivity {
                                 finish();
                             }else {
                                 progressDialog.dismiss();
-                                String message = task.getException().toString();
+                                String message = task.getException().getMessage();
                                 Toast.makeText(SignUp.this,"Registration Failed" + message,Toast.LENGTH_SHORT).show();
                             }
                         }

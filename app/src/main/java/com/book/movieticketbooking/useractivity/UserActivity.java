@@ -47,6 +47,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_activity);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        final String CurrentUserId = firebaseAuth.getUid();
 
         upcomingMovie = (Button)findViewById(R.id.upcoming_movie);
         bookShow = (Button)findViewById(R.id.book_show);
@@ -57,22 +58,24 @@ public class UserActivity extends AppCompatActivity {
         account = (Button)findViewById(R.id.user_bank);
 
         account.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                boolean firstStart = prefs.getBoolean("firstStart", true);
-                if (firstStart){
-                    startActivity(new Intent(UserActivity.this, CreatePasscode.class));
+                DatabaseReference PasscodeRef = FirebaseDatabase.getInstance().getReference("Passcode").child(firebaseAuth.getUid());
+                PasscodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            startActivity(new Intent(UserActivity.this, PassCode.class));
+                        }else {
+                            startActivity(new Intent(UserActivity.this,CreatePasscode.class));
+                        }
+                    }
 
-                    SharedPreferences prefs1 = getSharedPreferences("prefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs1.edit();
-                    editor.putBoolean("firstStart", false);
-                    editor.apply();
-                }else {
-                    startActivity(new Intent(UserActivity.this, PassCode.class));
-                }
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(UserActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

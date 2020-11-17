@@ -123,7 +123,7 @@ public class Login extends AppCompatActivity {
                             });
                         }
                     }else {
-                        Toast.makeText(Login.this, "Please check your Email id and Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }

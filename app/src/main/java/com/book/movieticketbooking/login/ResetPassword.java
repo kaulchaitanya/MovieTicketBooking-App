@@ -54,7 +54,7 @@ public class ResetPassword extends AppCompatActivity {
                                 startActivity(new Intent(ResetPassword.this, Login.class));
                             }else {
                                 progressDialog.dismiss();
-                                Toast.makeText(ResetPassword.this,"Error in sending email",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ResetPassword.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
