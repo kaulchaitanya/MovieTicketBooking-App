@@ -33,13 +33,13 @@ import com.squareup.picasso.Picasso;
 
 public class UpdateUpcomingMovieAdapter extends FirebaseRecyclerAdapter<Upcomingmovie, UpdateUpcomingMovieAdapter.myViewHolder> {
 
-
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      * @param options
      */
+
     public UpdateUpcomingMovieAdapter(@NonNull FirebaseRecyclerOptions<Upcomingmovie> options) {
         super(options);
     }
