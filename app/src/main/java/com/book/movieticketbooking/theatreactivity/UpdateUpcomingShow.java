@@ -71,7 +71,6 @@ public class UpdateUpcomingShow extends AppCompatActivity {
         update_upcoming_movieAdapter.stopListening();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.searchview, menu);

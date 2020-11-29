@@ -72,20 +72,13 @@ public class MyProfile extends AppCompatActivity {
         swipeRefreshLayout.setColorSchemeColors(Color.BLACK);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image");
-        storageReference.child(firebaseAuth.getUid())
-                .child("Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().centerCrop().into(imageView);
-            }
-        });
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userprofile userProfile = snapshot.getValue(Userprofile.class);
+                String ProfilePicUrl = userProfile.getUserProfilePic();
+                Picasso.get().load(ProfilePicUrl).fit().into(imageView);
                 Name.setText(userProfile.getUserName());
                 Dob.setText(userProfile.getUserDob());
                 Email.setText(userProfile.getUserEmail());

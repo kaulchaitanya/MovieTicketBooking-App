@@ -26,9 +26,18 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.book.movieticketbooking.R;
+import com.book.movieticketbooking.useractivity.model.Userprofile;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +47,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateProfileImage extends AppCompatActivity {
     private ImageView image;
@@ -74,7 +85,6 @@ public class UpdateProfileImage extends AppCompatActivity {
             if (resultCode == RESULT_OK){
                 FinalCrop = result.getUri();
                 image.setImageURI(FinalCrop);
-                Toast.makeText(this, "Image Cropped", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -101,12 +111,18 @@ public class UpdateProfileImage extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         button = (Button)findViewById(R.id.save_image);
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image");
-        storageReference.child(firebaseAuth.getUid())
-                .child("Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().centerCrop().into(image);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Userprofile userprofile = snapshot.getValue(Userprofile.class);
+                String ProfilePicUrl = userprofile.getUserProfilePic();
+                Picasso.get().load(ProfilePicUrl).fit().into(image);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UpdateProfileImage.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -116,21 +132,51 @@ public class UpdateProfileImage extends AppCompatActivity {
                     final ProgressDialog progressDialog = new ProgressDialog(UpdateProfileImage.this);
                     progressDialog.setTitle("Uploading Profile Image");
                     progressDialog.show();
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image").child(firebaseAuth.getUid()).child("Image");
-                    UploadTask uploadTask = storageReference.putFile(FinalCrop);
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            startActivity(new Intent(getApplicationContext(),MyProfile.class));
-                            Toast.makeText(getApplicationContext(), "Image update successful", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    final StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image").child(firebaseAuth.getUid()).child("Image");
+                    storageReference.putFile(FinalCrop).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                             double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                             progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                        }
+                    }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (task.isSuccessful()){
+                            return storageReference.getDownloadUrl();
+                        }else {
+                            progressDialog.dismiss();
+                            Toast.makeText(UpdateProfileImage.this, "Image Url not downloaded. Please Try Again !!!", Toast.LENGTH_SHORT).show();
+                            throw task.getException();
+                        }
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                                Uri downloadUri = task.getResult();
+                                String ProfilePicUri = downloadUri.toString();
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
+                                Map<String, Object> updateProfileImage = new HashMap<String, Object>();
+                                updateProfileImage.put("userProfilePic",ProfilePicUri);
+                                databaseReference1.updateChildren(updateProfileImage).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            progressDialog.dismiss();
+                                            startActivity(new Intent(getApplicationContext(),MyProfile.class));
+                                            Toast.makeText(getApplicationContext(), "Image update successful", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }else {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(UpdateProfileImage.this, "ProfilePic not updated", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }else {
+                                progressDialog.dismiss();
+                                Toast.makeText(UpdateProfileImage.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
             }
@@ -174,9 +220,14 @@ public class UpdateProfileImage extends AppCompatActivity {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 StorageReference storageReference1 = FirebaseStorage.getInstance().getReference("Profile Image").child(firebaseAuth.getUid()).child("Image");
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
                 storageReference1.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        Map<String, Object> updateProfilePic = new HashMap<String, Object>();
+                        String ProfilePic = "None";
+                        updateProfilePic.put("userProfilePic",ProfilePic);
+                        databaseReference.updateChildren(updateProfilePic);
                         Toast.makeText(getApplicationContext(),"Delete successful",Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         finish();

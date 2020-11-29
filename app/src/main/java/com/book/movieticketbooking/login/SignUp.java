@@ -35,33 +35,15 @@ public class SignUp extends AppCompatActivity {
 
     private TextView sign_in;
     private EditText name,email,password,dob,mobile,address;
-    //private ImageView profileImage;
     private Button register;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-    private FirebaseStorage firebaseStorage;
     private String Name,Dob,Email,Password,Mobile,Address;
     private String Balance = String.valueOf(0);
     private String type = String.valueOf(1);
+    private String UserProfilePic = "None";
     private Calendar calendar;
-    //private static final int PICK = 3;
-    //Uri imagePath;
 
-    /*
-     TODO: 20-09-2020  @Override
-        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            if (requestCode == PICK && resultCode == RESULT_OK && data.getData() != null){
-                imagePath = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
-                    profileImage.setImageBitmap(bitmap);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +53,6 @@ public class SignUp extends AppCompatActivity {
         setupUI();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
         progressDialog = new ProgressDialog(this);
 
         calendar = Calendar.getInstance();
@@ -94,17 +75,6 @@ public class SignUp extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-        /*
-         TODO: 20-09-2020 profileImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent((Intent.ACTION_PICK));
-                        intent.setType("image/*");
-                        startActivityForResult(intent,PICK);
-                    }
-                });
-        */
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,38 +165,12 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void SendUserData(){
-             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
-             Userprofile userProfile = new Userprofile(Name,Dob,Email,Mobile,Address,type);
-             databaseReference.setValue(userProfile);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
+        Userprofile userProfile = new Userprofile(Name,Dob,Email,Mobile,Address,type,UserProfilePic);
+        databaseReference.setValue(userProfile);
 
-             DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Account Info").child(firebaseAuth.getUid());
-             Account account = new Account(Name,Mobile,Dob,Mobile,Balance,Password);
-             databaseReference1.setValue(account);
-
-             /*
-              TODO: 20-09-2020
-
-                          DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User Info").child(firebaseAuth.getUid());
-                          UserProfile userProfile = new UserProfile(Name,Dob,Email,Mobile,Address);
-                          databaseReference.setValue(userProfile);
-
-                          DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Account Info").child(firebaseAuth.getUid());
-                          Account account = new Account(Name,Mobile,Dob,Mobile,Balance,Password);
-                          databaseReference1.setValue(account);
-
-                          StorageReference storageReference = FirebaseStorage.getInstance().getReference("Profile Image").child(firebaseAuth.getUid()).child("Image");
-                          UploadTask uploadTask = storageReference.putFile(imagePath);
-                          uploadTask.addOnFailureListener(new OnFailureListener() {
-                              @Override
-                              public void onFailure(@NonNull Exception e) {
-                                  Toast.makeText(getApplicationContext(),"Image upload failed",Toast.LENGTH_SHORT).show();
-                              }
-                          }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                              @Override
-                              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                  Toast.makeText(getApplicationContext(),"Image upload successful",Toast.LENGTH_SHORT).show();
-                              }
-                          });
-             */
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Account Info").child(firebaseAuth.getUid());
+        Account account = new Account(Name,Mobile,Dob,Mobile,Balance,Password);
+        databaseReference1.setValue(account);
     }
 }

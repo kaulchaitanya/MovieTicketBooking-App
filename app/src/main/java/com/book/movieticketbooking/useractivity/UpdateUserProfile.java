@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateUserProfile extends AppCompatActivity {
 
@@ -90,7 +92,6 @@ public class UpdateUserProfile extends AppCompatActivity {
                 String Email = Update_Email.getText().toString();
                 String Mobile = Update_Mobile.getText().toString();
                 String Address = Update_Address.getText().toString();
-                String Type = String.valueOf(1);
 
                 if (TextUtils.isEmpty(Name)){
                     Update_Name.setError("Enter Name");
@@ -103,8 +104,13 @@ public class UpdateUserProfile extends AppCompatActivity {
                 }else if (TextUtils.isEmpty(Address)){
                     Update_Address.setError("Enter Address");
                 }else {
-                    Userprofile userProfile = new Userprofile(Name,Dob,Email,Mobile,Address,Type);
-                    databaseReference.setValue(userProfile).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Map<String,Object> updateProfile = new HashMap<String, Object>();
+                    updateProfile.put("userName",Name);
+                    updateProfile.put("userDob",Dob);
+                    updateProfile.put("userEmail",Email);
+                    updateProfile.put("userMobile",Mobile);
+                    updateProfile.put("userAddress",Address);
+                    databaseReference.updateChildren(updateProfile).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(),"Update successful",Toast.LENGTH_SHORT).show();

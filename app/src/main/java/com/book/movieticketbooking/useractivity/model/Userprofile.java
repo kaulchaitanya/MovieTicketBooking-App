@@ -7,17 +7,19 @@ public class Userprofile {
     public String userMobile;
     public String userAddress;
     public String usertype;
+    public String userProfilePic;
 
     public Userprofile(){
     }
 
-    public Userprofile(String userName, String userDob, String userEmail, String userMobile, String userAddress,String usertype) {
+    public Userprofile(String userName, String userDob, String userEmail, String userMobile, String userAddress,String usertype, String userProfilePic) {
         this.userName = userName;
         this.userDob = userDob;
         this.userEmail = userEmail;
         this.userMobile = userMobile;
         this.userAddress = userAddress;
         this.usertype = usertype;
+        this.userProfilePic = userProfilePic;
     }
 
     public String getUserName() {
@@ -63,4 +65,8 @@ public class Userprofile {
     public String getUsertype() { return usertype; }
 
     public void setUsertype(String usertype) { this.usertype = usertype; }
+
+    public String getUserProfilePic() { return userProfilePic; }
+
+    public void setUserProfilePic(String userProfilePic) { this.userProfilePic = userProfilePic; }
 }
